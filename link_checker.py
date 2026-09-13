@@ -10,12 +10,13 @@ def check_link(url):
     except requests.exceptions.RequestException as e:
         print(f"❌ FAILED - {url} - Error: {e}")
 
+def load_urls(filename):
+    with open(filename, "r") as file:
+        urls = [line.strip() for line in file if line.strip()]
+    return urls
+
 if __name__ == "__main__":
-    urls = [
-        "https://www.google.com",
-        "https://www.github.com",
-        "https://thisurldoesnotexist12345.com"
-    ]
+    urls = load_urls("urls.txt")
 
     for link in urls:
         check_link(link)
